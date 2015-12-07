@@ -105,11 +105,11 @@ function dra_commands {
 			echo -e "\nCriteria created:\n"
 			cat criteriafile.json
 			
-			post_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X POST -d @criteriafile.json http://da.oneibmcloud.com/api/v1/criteria'
-			echo -e "\nPosting criteria to API...\n"
-			eval $post_criteria
+			#post_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X POST -d @criteriafile.json http://da.oneibmcloud.com/api/v1/criteria'
+			#echo -e "\nPosting criteria to API...\n"
+			#eval $post_criteria
 			
-			get_decision='grunt --gruntfile=node_modules/grunt-idra/idra.js -decision=DRADeploy_BOUND_COMPARE'
+			get_decision='grunt --gruntfile=node_modules/grunt-idra/idra.js -decision=dynamic -criteriafile=criteriafile.json'
 			echo -e "\nRequesting decision from API...\n"
 			eval $get_decision
 		else
