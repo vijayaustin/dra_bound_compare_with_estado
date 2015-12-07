@@ -38,7 +38,7 @@ function dra_logger {
     npm install grunt-cli
     npm install grunt-idra
 
-    echo "Service List: ${DRA_SERVICE_LIST}"
+    #echo "Service List: ${DRA_SERVICE_LIST}"
     echo -e ""
 
     #dra_commands "${DRA_EVENT_TYPE_1}" "${DRA_FILE_1}" "${DRA_SERVER}"
@@ -57,61 +57,39 @@ function dra_logger {
 
 function dra_commands {
     dra_grunt_command=""
-	RESULT=1
-	ATTEMPT=1
-	ATTEMPT_MAX=5
     
-    if [ -n "$1" ] && [ "$1" != " " ]; then
-        #echo -e "Service List: $1 is defined and not empty"
-		dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra/idra.js -statusCheck="'
-		dra_grunt_command+=$1
-		dra_grunt_command+='"'
-		echo -e "Final command sent to grunt-iDRA to check services:\n"
-		echo -e $dra_grunt_command
+    #if [ -n "$1" ] && [ "$1" != " " ]; then
+        echo -e "Service List: $1 is defined and not empty"
+		#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra/idra.js -statusCheck="'
+		#dra_grunt_command+=$1
+		#dra_grunt_command+='"'
+		#echo -e "Final command sent to grunt-iDRA to check services:\n"
+		#echo -e $dra_grunt_command
 		
-		eval $dra_grunt_command
-		RESULT=$?
-		
-		if [ $RESULT != 0 ]; then 
-			echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
-		fi
-		while [[ $RESULT -ne 0 && $ATTEMPT -le $ATTEMPT_MAX ]]
-		do
-			sleep 5
-			eval $dra_grunt_command
-			RESULT=$?
-			echo -e "Result of attempt #$ATTEMPT: $RESULT"
-			ATTEMPT=`expr $ATTEMPT + 1`
-		done
-		
-		if [ $RESULT != 0 ]; then 
-			echo -e "\nFINAL RESULT OF $ATTEMPT_MAX ATTEMPTS: $RESULT"
-			return $RESULT
+		if [ \"${DRA}\" == true ]; then
+			echo -e "\nChecked the box!\n"
+			delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
+			echo -e "Deleting criteria ...\n"
+			eval $delete_criteria
+			
+			criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
+			echo -e "\nCriteria Variable: $criteria_variable"
+			
+			criteria_to_file='echo $criteria_variable > criteriafile.json'
+			eval $criteria_to_file
+			echo -e "\nCriteria created:\n"
+			cat criteriafile.json
+			
+			post_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X POST -d @criteriafile.json http://da.oneibmcloud.com/api/v1/criteria'
+			echo -e "\nPosting criteria to API...\n"
+			eval $post_criteria
 		else
-			return 0
-		fi
+			echo -e "\nUnchecked the box!\n"
+        fi
 		
-		#delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=EnvListCheck_curl1'
-		#echo -e "Deleting criteria ...\n"
-		#eval $delete_criteria
-        
-		#criteria_variable='{"name": "EnvListCheck_curl1","revision": 2,"project": "key","mode": "decision","rules": [{"name": "Check for list of services in region","conditions": [{"eval": "_isEnvironmentListPassing('
-		#criteria_variable+=$1
-		#criteria_variable+=')","op": "=","value": true}]}]}'
-		#echo -e "\nCriteria Variable: $criteria_variable"
-		
-		#criteria_to_file='echo $criteria_variable > criteriafile.json'
-		#eval $criteria_to_file
-		#echo -e "\nCriteria created from service list:\n"
-		#cat criteriafile.json
-		
-		#post_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X POST -d @criteriafile.json http://da.oneibmcloud.com/api/v1/criteria'
-		#echo -e "\nPosting criteria to API...\n"
-		#eval $post_criteria
-        
-    else
-        echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
-    fi
+    #else
+        #echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
+    #fi
 }
 
 dra_logger
