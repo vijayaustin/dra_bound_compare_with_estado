@@ -89,7 +89,7 @@ function dra_commands {
 			echo -e "\nEvent file created:"
 			cat deployInfo.json
 			
-			send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfoProd -file=deployInfo.json'
+			send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfo -file=deployInfo.json'
 			echo -e "\nSending event to iDRA ...\n"
 			eval $send_event
 			
