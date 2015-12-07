@@ -69,8 +69,20 @@ function dra_commands {
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 		
-			event_variable='{"CF_ORG":"${CF_ORG}","CF_SPACE":"${CF_SPACE}","CF_APP":"${CF_APP}","CF_TARGET_URL":"${CF_TARGET_URL}","CF_ORG_ID":"${CF_ORGANIZATION_ID}","CF_SPACE_ID":"${CF_SPACE_ID}"}'
-			echo -e "\Event Variable: $event_variable"
+			event_variable='{"CF_ORG":"'
+			event_variable+=${CF_ORG}
+			event_variable+='","CF_SPACE":"'
+			event_variable+=${CF_SPACE}
+			event_variable+='","CF_APP":"'
+			event_variable+=${CF_APP}
+			event_variable+='","CF_TARGET_URL":"'
+			event_variable+=${CF_TARGET_URL}
+			event_variable+='","CF_ORG_ID":"'
+			event_variable+=${CF_ORGANIZATION_ID}
+			event_variable+='","CF_SPACE_ID":"'
+			event_variable+=${CF_SPACE_ID}
+			event_variable+='"}'
+			echo -e "\nEvent Variable: $event_variable"
 			
 			event_to_file='echo $event_variable > deployInfo.json'
 			eval $event_to_file
