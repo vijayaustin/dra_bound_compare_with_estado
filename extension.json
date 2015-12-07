@@ -36,6 +36,36 @@
             "label_key": "ENABLE_BOUND_SERVICE_KEY",
             "desc_key": "ENABLE_BOUND_SERVICE_DESC"
         },
+		{
+            "name": "ENABLE_COMPARE_APPS",
+            "type": "Checkbox",
+            "required": "false",
+            "default_value": "false",
+            "label_key": "ENABLE_COMPARE_APPS_KEY",
+            "desc_key": "ENABLE_COMPARE_APPS_DESC"
+        },
+		{
+            "name": "APP_DESTINATION",
+            "type": "Select",
+            "required": "false",
+            "default_value": "none",
+            "label_key": "APP_DESTINATION_KEY",
+            "desc_key": "APP_DESTINATION_DESC",
+            "options": [
+                {
+                    "label_key": "APP_DESTINATION_OPTION_1_KEY",
+                    "value": "Test"
+                },
+                {
+                    "label_key": "APP_DESTINATION_OPTION_2_KEY",
+                    "value": "Deploy"
+                },
+                { 
+                    "label_key": "APP_DESTINATION_OPTION_3_KEY",
+                    "value": "Alpha" 
+                }
+            ]
+        },
         {
             "name": "COMMAND",
             "type": "TextArea",
@@ -61,6 +91,8 @@ set +e
 export CF_APP=#APPLICATION_NAME#
 export DRA_PROJECT_KEY=#PROJECT_KEY#
 export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
+export DRA_ENABLE_COMPARE_APPS=#ENABLE_COMPARE_APPS#
+export DRA_APP_DESTINATION=#APP_DESTINATION#
         
 #check for defined host/port, if null set defaults
 if [ -z \"$HOST\" ]; then
