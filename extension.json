@@ -69,7 +69,7 @@ set +e
 export CF_APP=#APPLICATION_NAME#
 export DRA_PROJECT_KEY=#PROJECT_KEY#
 export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
-export DRA_ENABLE_BOUND_SERVICE=#DRA_ENABLE_BOUND_SERVICE#
+export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
         
 #check for defined host/port, if null set defaults
 if [ -z \"$HOST\" ]; then

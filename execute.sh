@@ -66,7 +66,7 @@ function dra_commands {
 		#echo -e "Final command sent to grunt-iDRA to check services:\n"
 		#echo -e $dra_grunt_command
 		
-		if [ \"${DRA}\" == true ]; then
+		if [ \"${DRA_ENABLE_BOUND_SERVICE}\" == true ]; then
 			echo -e "\nChecked the box!\n"
 			delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			echo -e "Deleting criteria ...\n"
