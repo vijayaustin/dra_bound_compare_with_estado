@@ -60,6 +60,7 @@ function dra_commands {
     
     #if [ -n "$1" ] && [ "$1" != " " ]; then
         echo -e "Service List: $1 is defined and not empty"
+		echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
 		#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra/idra.js -statusCheck="'
 		#dra_grunt_command+=$1
 		#dra_grunt_command+='"'
