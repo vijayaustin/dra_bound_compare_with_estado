@@ -28,14 +28,6 @@
             "label_key": "PROJECT_KEY_KEY",
             "desc_key": "PROJECT_KEY_DESC"
         },
-        {
-            "name": "SERVICE_LIST",
-            "type": "Text",
-            "required": "false",
-            "default_value": "",
-            "label_key": "SERVICE_LIST_KEY",
-            "desc_key": "SERVICE_LIST_DESC"
-        },
 		{
             "name": "ENABLE_BOUND_SERVICE",
             "type": "Checkbox",
@@ -68,7 +60,6 @@ set +e
 
 export CF_APP=#APPLICATION_NAME#
 export DRA_PROJECT_KEY=#PROJECT_KEY#
-export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
 export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
         
 #check for defined host/port, if null set defaults

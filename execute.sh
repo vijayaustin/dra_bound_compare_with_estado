@@ -59,7 +59,7 @@ function dra_commands {
     dra_grunt_command=""
     
     #if [ -n "$1" ] && [ "$1" != " " ]; then
-        echo -e "Service List: $1 is defined and not empty"
+        #echo -e "Service List: $1 is defined and not empty"
 		echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
 		#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra/idra.js -statusCheck="'
 		#dra_grunt_command+=$1
@@ -68,7 +68,19 @@ function dra_commands {
 		#echo -e $dra_grunt_command
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
-			echo -e "\nChecked the box!\n"
+		
+			event_variable='{"CF_ORG":"${CF_ORG}","CF_SPACE":"${CF_SPACE}","CF_APP":"${CF_APP}","CF_TARGET_URL":"${CF_TARGET_URL}","CF_ORG_ID":"${CF_ORGANIZATION_ID}","CF_SPACE_ID":"${CF_SPACE_ID}"}'
+			echo -e "\Event Variable: $event_variable"
+			
+			event_to_file='echo $event_variable > deployInfo.json'
+			eval $event_to_file
+			echo -e "\nEvent file created:\n"
+			cat deployInfo.json
+			
+			send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfoProd -file=deployInfo.json'
+			echo -e "\nSending event ...\n"
+			eval $send_event
+			
 			delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			echo -e "Deleting criteria ...\n"
 			eval $delete_criteria
