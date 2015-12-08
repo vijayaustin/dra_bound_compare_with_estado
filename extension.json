@@ -149,7 +149,12 @@
             "desc_key": "COMMAND_DESC"
         }
     ],
-    "outputs": [],
+    "outputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
     "execution": {
         "type": "JenkinsDocker",
         "shell": "#!/bin/bash
