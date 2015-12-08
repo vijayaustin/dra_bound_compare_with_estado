@@ -125,7 +125,8 @@ function dra_commands {
 			
 			send_manifest_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType='
 			send_manifest_event+=$event_name
-			send_manifest_event+=' -file=${DRA_MANIFEST_FILE}'
+			send_manifest_event+=' -file='
+			send_manifest_event+=${DRA_MANIFEST_FILE}
 			echo -e "\nEvent created: $send_manifest_event\n"
 			#echo -e "\nSending event to iDRA ...\n"
 			#eval $send_manifest_event
