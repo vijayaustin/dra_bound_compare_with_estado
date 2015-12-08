@@ -120,11 +120,12 @@ function dra_commands {
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
 			
 			event_name="$(echo -e "${IDS_STAGE_NAME}" | tr -d '[[:space:]]')"
+			event_name+='_'
 			event_name+="$(echo -e "${IDS_JOB_NAME}" | tr -d '[[:space:]]')"
 			
 			send_manifest_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType='
 			send_manifest_event+=$event_name
-			send_manifest_event+=' -file=$DRA_MANIFEST_FILE'
+			send_manifest_event+=' -file=${DRA_MANIFEST_FILE}'
 			echo -e "\nEvent created: $send_manifest_event\n"
 			#echo -e "\nSending event to iDRA ...\n"
 			#eval $send_manifest_event
