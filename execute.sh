@@ -128,8 +128,8 @@ function dra_commands {
 			send_manifest_event+=' -file='
 			send_manifest_event+=${DRA_MANIFEST_FILE}
 			echo -e "\nEvent created: $send_manifest_event\n"
-			#echo -e "\nSending event to iDRA ...\n"
-			#eval $send_manifest_event
+			echo -e "\nSending event to iDRA ...\n"
+			eval $send_manifest_event
 			
 			#delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			#echo -e "\nDeleting existing criteria ...\n"
