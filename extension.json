@@ -70,7 +70,7 @@
             "name": "MANIFEST_FILE",
             "type": "Text",
             "required": "true",
-            "default_value": "<Enter App Name>",
+            "default_value": "",
             "label_key": "MANIFEST_FILE_KEY",
             "desc_key": "MANIFEST_FILE_DESC"
         },
