@@ -83,17 +83,17 @@ function dra_commands {
 		event_variable+='"}'
 		#echo -e "\nEvent Variable: $event_variable"
 		
+		event_to_file='echo $event_variable > deployInfo.json'
+		eval $event_to_file
+		echo -e "\nEvent file created:"
+		cat deployInfo.json
+		
+		send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfo -file=deployInfo.json'
+		echo -e "\nSending event to iDRA ...\n"
+		eval $send_event
+		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 
-			event_to_file='echo $event_variable > deployInfo.json'
-			eval $event_to_file
-			echo -e "\nEvent file created:"
-			cat deployInfo.json
-			
-			send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfo -file=deployInfo.json'
-			echo -e "\nSending event to iDRA ...\n"
-			eval $send_event
-			
 			#delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			#echo -e "\nDeleting existing criteria ...\n"
 			#eval $delete_criteria
@@ -118,35 +118,36 @@ function dra_commands {
         fi
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-
-			event_to_file='echo $event_variable > deployInfo1.json'
-			eval $event_to_file
-			echo -e "\nEvent file created:"
-			cat deployInfo.json
 			
-			send_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType=deployInfo1 -file=deployInfo1.json'
-			echo -e "\nSending event to iDRA ...\n"
-			eval $send_event
+			event_name="$(echo -e "${IDS_STAGE_NAME}" | tr -d '[[:space:]]')"
+			event_name+="$(echo -e "${IDS_JOB_NAME}" | tr -d '[[:space:]]')"
+			
+			send_manifest_event='grunt --gruntfile=node_modules/grunt-idra/idra.js -eventType='
+			send_manifest_event+=$event_name
+			send_manifest_event+=' -file=$DRA_MANIFEST_FILE'
+			echo -e "\nEvent created: $send_manifest_event\n"
+			#echo -e "\nSending event to iDRA ...\n"
+			#eval $send_manifest_event
 			
 			#delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			#echo -e "\nDeleting existing criteria ...\n"
 			#eval $delete_criteria
 			
-			criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
+			#criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
 			#echo -e "\nCriteria Variable: $criteria_variable"
 			
-			criteria_to_file='echo $criteria_variable > criteriafile.json'
-			eval $criteria_to_file
-			echo -e "\nCriteria created:\n"
-			cat criteriafile.json
+			#criteria_to_file='echo $criteria_variable > criteriafile.json'
+			#eval $criteria_to_file
+			#echo -e "\nCriteria created:\n"
+			#cat criteriafile.json
 			
 			#post_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X POST -d @criteriafile.json http://da.oneibmcloud.com/api/v1/criteria'
 			#echo -e "\nPosting criteria to API...\n"
 			#eval $post_criteria
 			
-			get_decision='grunt --gruntfile=node_modules/grunt-idra/idra.js -decision=dynamic -criteriafile=criteriafile.json'
-			echo -e "\nRequesting decision from API...\n"
-			eval $get_decision
+			#get_decision='grunt --gruntfile=node_modules/grunt-idra/idra.js -decision=dynamic -criteriafile=criteriafile.json'
+			#echo -e "\nRequesting decision from API...\n"
+			#eval $get_decision
 		else
 			echo -e "\nUnchecked compare deployments box!\n"
         fi
