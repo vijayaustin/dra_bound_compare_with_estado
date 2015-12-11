@@ -184,7 +184,7 @@ function dra_commands {
 				ATTEMPT=`expr $ATTEMPT + 1`
 			done
 			
-			if [ $RESULT1 != 0 ]; then 
+			if [[ $RESULT1 != 0 && $DRA_ATTEMPT_MAX -ge 1 ]]; then 
 				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1\n"
 				#return $RESULT1
 			else
