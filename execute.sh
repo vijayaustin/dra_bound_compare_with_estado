@@ -93,6 +93,8 @@ function dra_commands {
 		eval $send_event
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
+		
+			echo -e "\nChecked bound service box!\n"
 
 			#delete_criteria='curl -H "projectKey: ${DRA_PROJECT_KEY}" -H "Content-Type: application/json" -X DELETE http://da.oneibmcloud.com/api/v1/criteria?name=DRADeploy_BOUND_COMPARE'
 			#echo -e "\nDeleting existing criteria ...\n"
@@ -121,6 +123,7 @@ function dra_commands {
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
 			
+			echo -e "\nChecked compare deployments box!\n"
 			event_name="$(echo -e "${IDS_STAGE_NAME}" | tr -d '[[:space:]]')"
 			event_name+='_'
 			event_name+="$(echo -e "${IDS_JOB_NAME}" | tr -d '[[:space:]]')"
@@ -166,6 +169,7 @@ function dra_commands {
 			
 			eval $dra_grunt_command
 			RESULT1=$?
+			echo -e "Result of check Estado services: $RESULT1"
 			
 			if [ $RESULT1 != 0 ]; then 
 				echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
@@ -183,9 +187,11 @@ function dra_commands {
 				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
 				#return $RESULT1
 			else
-				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+				#echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
 			fi
 		else
+			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
+			RESULT1=0
 			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
 		fi
 		
