@@ -173,9 +173,8 @@ function dra_commands {
 			
 			if [ $RESULT1 != 0 ]; then 
 				echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
-				ATTEMPT=1
 			fi
-			while [[ $RESULT1 -ne 0 && $ATTEMPT -ge 1 && $ATTEMPT -le $DRA_ATTEMPT_MAX ]]
+			while [[ $RESULT1 -ne 0 && $ATTEMPT -le $DRA_ATTEMPT_MAX ]]
 			do
 				sleep 6
 				eval $dra_grunt_command
