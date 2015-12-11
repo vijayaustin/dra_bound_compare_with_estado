@@ -184,7 +184,6 @@ function dra_commands {
 				ATTEMPT=`expr $ATTEMPT + 1`
 			done
 		else
-			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
 			RESULT1=0
 			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
 		fi
