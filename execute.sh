@@ -113,6 +113,8 @@ function dra_commands {
 			get_decision='grunt --gruntfile=node_modules/grunt-idra/idra.js -decision=dynamic -criteriafile=criteriafile.json'
 			echo -e "\nRequesting decision from API...\n"
 			eval $get_decision
+			RESULT2=$?
+			echo -e "Result of check bound services: $RESULT2"
 		else
 			echo -e "\nUnchecked bound service box!\n"
         fi
@@ -153,6 +155,46 @@ function dra_commands {
 		else
 			echo -e "\nUnchecked compare deployments box!\n"
         fi
+		
+		if [ -n "$1" ] && [ "$1" != " " ]; then
+			#echo -e "Service List: $1 is defined and not empty"
+			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra/idra.js -statusCheck="'
+			dra_grunt_command+=$1
+			dra_grunt_command+='"'
+			echo -e "Final command sent to grunt-iDRA to check services:\n"
+			echo -e $dra_grunt_command
+			
+			eval $dra_grunt_command
+			RESULT1=$?
+			
+			if [ $RESULT1 != 0 ]; then 
+				echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
+			fi
+			while [[ $RESULT1 -ne 0 && $ATTEMPT -le $DRA_ATTEMPT_MAX ]]
+			do
+				sleep 6
+				eval $dra_grunt_command
+				RESULT1=$?
+				echo -e "Result of attempt #$ATTEMPT: $RESULT1"
+				ATTEMPT=`expr $ATTEMPT + 1`
+			done
+			
+			if [ $RESULT1 != 0 ]; then 
+				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+				#return $RESULT1
+			else
+				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+			fi
+		else
+			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
+		fi
+		
+		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then 
+			#echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+			return 1
+		else
+			return 0
+		fi
 		
     #else
         #echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"

@@ -1,5 +1,5 @@
 {
-    "id": "ibm.devops.services.pipeline.tryout_dra_bound_compare",
+    "id": "ibm.devops.services.pipeline.tryout_dra_bound_compare_with_estado",
     "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
@@ -27,6 +27,22 @@
             "default_value": "",
             "label_key": "PROJECT_KEY_KEY",
             "desc_key": "PROJECT_KEY_DESC"
+        },
+		{
+            "name": "SERVICE_LIST",
+            "type": "Text",
+            "required": "false",
+            "default_value": "",
+            "label_key": "SERVICE_LIST_KEY",
+            "desc_key": "SERVICE_LIST_DESC"
+        },
+		{
+            "name": "ATTEMPT_MAX",
+            "type": "Text",
+            "required": "false",
+            "default_value": "0",
+            "label_key": "ATTEMPT_MAX_KEY",
+            "desc_key": "ATTEMPT_MAX_DESC"
         },
 		{
             "name": "ENABLE_BOUND_SERVICE",
@@ -164,6 +180,8 @@ set +e
 
 export CF_APP=#APPLICATION_NAME#
 export DRA_PROJECT_KEY=#PROJECT_KEY#
+export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
+export DRA_ATTEMPT_MAX=#ATTEMPT_MAX#
 export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
 export DRA_ENABLE_COMPARE_APPS=#ENABLE_COMPARE_APPS#
 export DRA_APP_DESTINATION=#APP_DESTINATION#
