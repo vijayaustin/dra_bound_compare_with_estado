@@ -185,10 +185,10 @@ function dra_commands {
 			done
 			
 			if [ $RESULT1 != 0 ]; then 
-				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1\n"
 				#return $RESULT1
 			else
-				#echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+				echo -e "\nSuceeded after multiple attempts!!!\n"
 			fi
 		else
 			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
