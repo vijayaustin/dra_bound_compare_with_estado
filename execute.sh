@@ -171,7 +171,7 @@ function dra_commands {
 			RESULT1=$?
 			echo -e "Result of check Estado services: $RESULT1"
 			
-			if [ $RESULT1 != 0 ]; then 
+			if [[ $RESULT1 != 0 && $DRA_ATTEMPT_MAX -ge 1]]; then 
 				echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
 				ATTEMPT=1
 			fi
