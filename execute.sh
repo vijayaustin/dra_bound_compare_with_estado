@@ -183,21 +183,13 @@ function dra_commands {
 				echo -e "Result of attempt #$ATTEMPT: $RESULT1"
 				ATTEMPT=`expr $ATTEMPT + 1`
 			done
-			
-			if [[ $RESULT1 != 0 && $DRA_ATTEMPT_MAX -ge 1 ]]; then 
-				echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1\n"
-				#return $RESULT1
-			else
-				echo -e "\nSuceeded after multiple attempts!!!\n"
-			fi
 		else
 			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
 			RESULT1=0
 			echo -e "\nService List is not defined or is empty .. proceeding with deployment ..\n"
 		fi
 		
-		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then 
-			#echo -e "\nFINAL RESULT OF $DRA_ATTEMPT_MAX ATTEMPTS: $RESULT1"
+		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then
 			return 1
 		else
 			return 0
