@@ -1,5 +1,5 @@
 {
-    "id": "ibm.devops.services.pipeline.tryout_dra_bound_compare_with_estado",
+    "id": "ibm.devops.services.pipeline.dra_deploy_extn",
     "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
@@ -21,12 +21,12 @@
             "desc_key": "APPLICATION_NAME_DESC"
         },
 		{
-            "name": "PROJECT_KEY",
+            "name": "TOOLCHAIN_ID",
             "type": "Secure",
             "required": "true",
             "default_value": "",
-            "label_key": "PROJECT_KEY_KEY",
-            "desc_key": "PROJECT_KEY_DESC"
+            "label_key": "TOOLCHAIN_ID_KEY",
+            "desc_key": "TOOLCHAIN_ID_DESC"
         },
 		{
             "name": "SERVICE_LIST",
@@ -179,7 +179,8 @@ set +x
 set +e 
 
 export CF_APP=#APPLICATION_NAME#
-export DRA_PROJECT_KEY=#PROJECT_KEY#
+export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
+export DRA_PROJECT_KEY=#TOOLCHAIN_ID#
 export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
 export DRA_ATTEMPT_MAX=#ATTEMPT_MAX#
 export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
