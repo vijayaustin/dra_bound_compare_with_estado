@@ -21,14 +21,6 @@
             "desc_key": "APPLICATION_NAME_DESC"
         },
 		{
-            "name": "TOOLCHAIN_ID",
-            "type": "Secure",
-            "required": "true",
-            "default_value": "",
-            "label_key": "TOOLCHAIN_ID_KEY",
-            "desc_key": "TOOLCHAIN_ID_DESC"
-        },
-		{
             "name": "SERVICE_LIST",
             "type": "Text",
             "required": "false",
