@@ -36,7 +36,8 @@ set +x
 function dra_logger {
     npm install grunt
     npm install grunt-cli
-    npm install grunt-idra
+    #npm install grunt-idra
+	npm install grunt-idra2
 
     #echo "Service List: ${DRA_SERVICE_LIST}"
     echo -e ""

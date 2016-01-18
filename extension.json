@@ -53,14 +53,6 @@
             "desc_key": "ENABLE_BOUND_SERVICE_DESC"
         },
 		{
-            "name": "ENABLE_COMPARE_APPS",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "ENABLE_COMPARE_APPS_KEY",
-            "desc_key": "ENABLE_COMPARE_APPS_DESC"
-        },
-		{
             "name": "APP_DESTINATION",
             "type": "Select",
             "required": "false",
@@ -83,52 +75,20 @@
             ]
         },
 		{
+            "name": "ENABLE_COMPARE_APPS",
+            "type": "Checkbox",
+            "required": "false",
+            "default_value": "false",
+            "label_key": "ENABLE_COMPARE_APPS_KEY",
+            "desc_key": "ENABLE_COMPARE_APPS_DESC"
+        },
+		{
             "name": "MANIFEST_FILE",
             "type": "Text",
             "required": "true",
             "default_value": "",
             "label_key": "MANIFEST_FILE_KEY",
             "desc_key": "MANIFEST_FILE_DESC"
-        },
-		{
-            "name": "COMPARE_MEMORY",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "COMPARE_MEMORY_KEY",
-            "desc_key": "COMPARE_MEMORY_DESC"
-        },
-		{
-            "name": "COMPARE_DISK_QUOTA",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "COMPARE_DISK_QUOTA_KEY",
-            "desc_key": "COMPARE_DISK_QUOTA_DESC"
-        },
-		{
-            "name": "COMPARE_INSTANCES",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "COMPARE_INSTANCES_KEY",
-            "desc_key": "COMPARE_INSTANCES_DESC"
-        },
-		{
-            "name": "COMPARE_ENV_VERSION",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "COMPARE_ENV_VERSION_KEY",
-            "desc_key": "COMPARE_ENV_VERSION_DESC"
-        },
-		{
-            "name": "COMPARE_SERVICES",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "COMPARE_SERVICES_KEY",
-            "desc_key": "COMPARE_SERVICES_DESC"
         },
 		{
             "name": "APP_NOTDESTINATION",
