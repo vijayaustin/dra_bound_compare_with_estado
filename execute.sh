@@ -34,11 +34,7 @@ set +e
 set +x 
 
 function dra_logger {
-    npm install grunt
-    npm install grunt-cli
-    #npm install grunt-idra
-	npm install grunt-idra2
-	
+
 	export CF_TOKEN=$(sed -e 's/^.*"AccessToken":"\([^"]*\)".*$/\1/' ~/.cf/config.json)
     ${EXT_DIR}/dra-check.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}"
 	IS_DRA_RESULT=$?
@@ -53,6 +49,10 @@ function dra_logger {
 }
 
 function dra_commands {
+
+	npm install grunt
+    npm install grunt-cli
+	npm install grunt-idra2
     dra_grunt_command=""
     
 		echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
