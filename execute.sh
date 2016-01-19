@@ -91,6 +91,7 @@ function dra_commands {
 			RESULT2=$?
 			echo -e "Result of check bound services: $RESULT2"
 		else
+			RESULT2=0
 			echo -e "\nUnchecked bound service box!\n"
         fi
 		
