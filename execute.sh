@@ -39,8 +39,16 @@ function dra_logger {
     #npm install grunt-idra
 	npm install grunt-idra2
 	
-    echo -e ""
-	dra_commands "${DRA_SERVICE_LIST}"
+	export CF_TOKEN=$(sed -e 's/^.*"AccessToken":"\([^"]*\)".*$/\1/' ~/.cf/config.json)
+    ${EXT_DIR}/dra-check.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}"
+	IS_DRA_RESULT=$?
+	
+	if [ $IS_DRA_RESULT -eq 0 ]; then
+		echo "DRA is present";
+		dra_commands "${DRA_SERVICE_LIST}"
+	else
+		echo "DRA is not present";
+	fi
 }
 
 function dra_commands {
