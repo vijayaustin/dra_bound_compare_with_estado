@@ -8,7 +8,7 @@ import requests
 
 
 if len(sys.argv) < 4:
-    print "ERROR: TOOLCHAIN_ID, BEARER, or PROJECT_NAME are not defined."
+    print "ERROR: TOOLCHAIN_ID, BEARER or PROJECT_NAME are not defined."
     exit(1)
     
     
