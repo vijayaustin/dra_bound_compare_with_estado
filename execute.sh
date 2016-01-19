@@ -48,6 +48,7 @@ function dra_logger {
 		dra_commands "${DRA_SERVICE_LIST}"
 	else
 		echo "DRA is not present";
+		return 0
 	fi
 }
 
