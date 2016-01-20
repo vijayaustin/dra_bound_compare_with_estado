@@ -77,7 +77,7 @@
 		{
             "name": "MANIFEST_FILE",
             "type": "Text",
-            "required": "true",
+            "required": "false",
             "default_value": "",
             "label_key": "MANIFEST_FILE_KEY",
             "desc_key": "MANIFEST_FILE_DESC"
@@ -130,7 +130,7 @@
 set +x
 set +e 
 
-export CF_APP=#APPLICATION_NAME#
+export CF_APPS=#APPLICATION_NAME#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
 export DRA_PROJECT_KEY=#TOOLCHAIN_ID#
 export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
