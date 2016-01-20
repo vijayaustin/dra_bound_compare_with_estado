@@ -121,6 +121,7 @@ function dra_commands {
 			echo -e "\nSending event to iDRA ...\n"
 			eval $send_manifest_event
 		else
+			RESULT3=0
 			#echo -e "\nUnchecked compare deployments box!\n"
         fi
 		
