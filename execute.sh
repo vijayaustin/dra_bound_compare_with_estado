@@ -81,7 +81,9 @@ function dra_commands {
 		
 		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json'
 		echo -e "\nSending event to iDRA ...\n"
+		echo -e "${no_color}"
 		eval $send_event
+		echo -e "${no_color}"
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 		
@@ -130,7 +132,9 @@ function dra_commands {
 			echo -e "Final command sent to grunt-iDRA to check services:\n"
 			echo -e $dra_grunt_command
 			
+			echo -e "${no_color}"
 			eval $dra_grunt_command
+			echo -e "${no_color}"
 			RESULT1=$?
 			echo -e "Result of check Estado services: $RESULT1"
 			
