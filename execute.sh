@@ -39,7 +39,7 @@ function dra_logger {
     ${EXT_DIR}/dra-check.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}"
 	IS_DRA_RESULT=$?
 	
-	echo -e "\nIS_DRA_RESULT: $IS_DRA_RESULT\n"
+	echo -e "\nIS_DRA_RESULT xxxxxx: $IS_DRA_RESULT\n"
 	if [ $IS_DRA_RESULT -eq 0 ]; then
 		echo "DRA is present";
 		dra_commands "${DRA_SERVICE_LIST}"
