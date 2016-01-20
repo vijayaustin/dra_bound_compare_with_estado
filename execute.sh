@@ -56,8 +56,8 @@ function dra_commands {
 	npm install grunt-idra2
     dra_grunt_command=""
     
-		echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
-		echo -e "DRA_ENABLE_COMPARE_APPS value: $DRA_ENABLE_COMPARE_APPS"
+		#echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
+		#echo -e "DRA_ENABLE_COMPARE_APPS value: $DRA_ENABLE_COMPARE_APPS"
 		
 		event_variable='{"CF_ORG":"'
 		event_variable+=${CF_ORG}
@@ -72,15 +72,15 @@ function dra_commands {
 		event_variable+='","CF_SPACE_ID":"'
 		event_variable+=${CF_SPACE_ID}
 		event_variable+='"}'
-		echo -e "\nEvent Variable: $event_variable"
+		#echo -e "\nEvent Variable: $event_variable"
 		
 		event_to_file='echo $event_variable > deployInfo.json'
 		eval $event_to_file
-		echo -e "\nEvent file created:"
-		cat deployInfo.json
+		#echo -e "\nEvent file created:"
+		#cat deployInfo.json
 		
 		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json'
-		echo -e "\nSending event to iDRA ...\n"
+		echo -e "\nSending deployInfo event to iDRA ..."
 		echo -e "${no_color}"
 		eval $send_event
 		echo -e "${no_color}"
