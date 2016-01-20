@@ -134,8 +134,9 @@ function dra_commands {
 			
 			echo -e "${no_color}"
 			eval $dra_grunt_command
-			echo -e "${no_color}"
 			RESULT1=$?
+			echo -e "${no_color}"
+			
 			echo -e "Result of check Estado services: $RESULT1"
 			
 			if [[ $RESULT1 != 0 && $DRA_ATTEMPT_MAX -ge 1 ]]; then 
@@ -147,8 +148,9 @@ function dra_commands {
 				sleep 6
 				echo -e "${no_color}"
 				eval $dra_grunt_command
-				echo -e "${no_color}"
 				RESULT1=$?
+				echo -e "${no_color}"
+				
 				echo -e "Result of attempt #$ATTEMPT: $RESULT1"
 				ATTEMPT=`expr $ATTEMPT + 1`
 			done
