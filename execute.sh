@@ -145,7 +145,9 @@ function dra_commands {
 			while [[ $RESULT1 -ne 0 && $ATTEMPT -ge 1 && $ATTEMPT -le $DRA_ATTEMPT_MAX ]]
 			do
 				sleep 6
+				echo -e "${no_color}"
 				eval $dra_grunt_command
+				echo -e "${no_color}"
 				RESULT1=$?
 				echo -e "Result of attempt #$ATTEMPT: $RESULT1"
 				ATTEMPT=`expr $ATTEMPT + 1`
