@@ -5,6 +5,7 @@
     "desc_key": "ExtDesc",
     "extension_type": "Deploy",
     "message_key": "ExtMessage",
+	"inventory_entry_type": "cf",
 	"inputs": [
         {
             "type": "Bluemix",
