@@ -55,10 +55,7 @@ function dra_commands {
     npm install grunt-cli
 	npm install grunt-idra2
     dra_grunt_command=""
-    
-		#echo -e "DRA_ENABLE_BOUND_SERVICE value: $DRA_ENABLE_BOUND_SERVICE"
-		#echo -e "DRA_ENABLE_COMPARE_APPS value: $DRA_ENABLE_COMPARE_APPS"
-		
+	
 		event_variable='{"CF_ORG":"'
 		event_variable+=${CF_ORG}
 		event_variable+='","CF_SPACE":"'
@@ -87,7 +84,7 @@ function dra_commands {
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 		
-			#echo -e "\nChecked bound service box!\n"
+			echo -e "\nChecking status of services bound to this application ...\n"
 			
 			criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
 			echo -e "\nCriteria Variable: $criteria_variable"
@@ -104,11 +101,11 @@ function dra_commands {
 			echo -e "Result of check bound services: $RESULT2"
 		else
 			RESULT2=0
-			#echo -e "\nUnchecked bound service box!\n"
+			echo -e "\nSkipping 'Bound Services' check ...\n"
         fi
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-			#echo -e "\nChecked compare deployments box!\n"
+			echo -e "\nComparing applications now ...\n"
 			event_name="$(echo -e "${IDS_STAGE_NAME}" | tr -d '[[:space:]]')"
 			event_name+='_'
 			event_name+="$(echo -e "${IDS_JOB_NAME}" | tr -d '[[:space:]]')"
@@ -122,26 +119,26 @@ function dra_commands {
 			eval $send_manifest_event
 		else
 			RESULT3=0
-			#echo -e "\nUnchecked compare deployments box!\n"
+			echo -e "\nSkipping 'Compare deployments' check ...\n"
         fi
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
-			#echo -e "Service List: $1 is defined and not empty"
-			estado_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
+			echo -e "Estado service list: $1 is defined and not empty"
+			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
 			estado_criteria_variable+=$1
 			estado_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			
 			estado_criteria_to_file='echo $estado_criteria_variable > estadocriteriafile.json'
 			eval $estado_criteria_to_file
-			echo -e "\nEstado Criteria created:\n"
+			echo -e "\nEstado criteria file:\n"
 			cat estadocriteriafile.json
 			
 						
 			#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -statusCheck="'
 			#dra_grunt_command+=$1
 			#dra_grunt_command+='"'
-			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=estadocriteriafile.json"'
-			#echo -e "\nFinal command sent to grunt-iDRA to check services:\n"
+			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=estadocriteriafile.json'
+			echo -e "\nFinal command sent to grunt-iDRA to check Estado Services:\n"
 			echo -e $dra_grunt_command
 			
 			echo -e "${no_color}"
@@ -168,7 +165,7 @@ function dra_commands {
 			done
 		else
 			RESULT1=0
-			#echo -e "Service List is not defined or is empty .. proceeding with deployment .."
+			echo -e "Service List is not defined or is empty .. proceeding with deployment ..."
 		fi
 		
 		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then
