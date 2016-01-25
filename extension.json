@@ -113,7 +113,9 @@
             "name": "COMMAND",
             "type": "TextArea",
             "required": "true",
-            "default_value" : "#!/bin/bash",
+            "default_value" : "#!/bin/bash
+			cf push \"${CF_APP}\"
+			",
             "label_key": "COMMAND_KEY",
             "desc_key": "COMMAND_DESC"
         }
