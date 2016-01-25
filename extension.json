@@ -16,8 +16,8 @@
 		{
             "name": "APPLICATION_NAME",
             "type": "Text",
-            "required": "true",
-            "default_value": "myApplicationName",
+            "required": "false",
+            "default_value": "",
             "label_key": "APPLICATION_NAME_KEY",
             "desc_key": "APPLICATION_NAME_DESC"
         },
