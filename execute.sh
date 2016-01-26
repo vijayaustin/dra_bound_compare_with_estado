@@ -102,10 +102,10 @@ function dra_commands {
 			#echo -e "\nCriteria created:\n"
 			#cat boundcriteriafile.json
 			
-			get_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
+			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
 			echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
-			eval $get_decision
+			eval $get_bound_decision
 			RESULT2=$?
 			echo -e "${no_color}"
 		else
@@ -142,6 +142,10 @@ function dra_commands {
 			cat comparecriteriafile.json
 			
 			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json'
+			echo -e "Requesting decision from DRA..."
+			echo -e "${no_color}"
+			eval $get_compare_decision
+			echo -e "${no_color}"
 			
 		else
 			RESULT3=0
