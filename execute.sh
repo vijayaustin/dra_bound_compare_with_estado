@@ -70,15 +70,7 @@ function dra_commands {
 		event_variable+=${CF_SPACE_ID}
 		event_variable+='"}'
 		echo -e "\nEvent Variable: $event_variable"
-		
-		if [ ${DRA_MODE} == true ]; then
-			mode = 'advisory'
-		else
-			mode = 'decision'
-		fi
-		
-		echo -e "\nDRA Mode: $mode"
-		
+
 		event_to_file='echo $event_variable > deployInfo.json'
 		eval $event_to_file
 		#echo -e "\nEvent file created:"
@@ -89,6 +81,13 @@ function dra_commands {
 		echo -e "${no_color}"
 		eval $send_event
 		echo -e "${no_color}"
+		
+		if [ ${DRA_MODE} == true ]; then
+			mode = 'advisory'
+		else
+			mode = 'decision'
+		fi
+		echo -e "\nDRA Mode: $mode"
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 		
