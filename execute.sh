@@ -135,7 +135,11 @@ function dra_commands {
 			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
 			eval $send_event1
 			
-			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments($event2_name,$event1_name)", "op": "=", "value": true } ] } ] }'
+			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
+			compare_criteria_variable+=$event2_name
+			compare_criteria_variable+=','
+			compare_criteria_variable+=$event1_name
+			')", "op": "=", "value": true } ] } ] }'
 			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
 			eval $compare_criteria_to_file
 			echo -e "\nCriteria created:\n"
