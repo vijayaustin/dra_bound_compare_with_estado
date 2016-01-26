@@ -130,20 +130,18 @@ function dra_commands {
 			
 			event1_to_file='echo $event_variable > $event1_file'
 			eval $event1_to_file
-			event2_to_file='echo $event_variable > $event2_file'
-			eval $event2_to_file
-			
-			echo -e "\nFile contents:"
-			showcontents='cat $event1_file'
-			eval $showcontents
-			showcontents='cat $event2_file'
-			eval $showcontents
 			
 			echo -e "\nSending event to iDRA ...\n"
 			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
 			eval $send_event1
-			send_event2='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event2_name -file=$event2_file'
-			eval $send_event2
+			
+			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments($event2_name,$event1_name)", "op": "=", "value": true } ] } ] }'
+			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
+			eval $compare_criteria_to_file
+			echo -e "\nCriteria created:\n"
+			cat comparecriteriafile.json
+			
+			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json'
 			
 		else
 			RESULT3=0
