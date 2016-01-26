@@ -87,10 +87,10 @@ function dra_commands {
 		
 		if [ ${DRA_MODE} == true ]; then
 			echo -e "\nMode TRUE"
-			mode = 'advisory'
+			mode='advisory'
 		else
 			echo -e "\nMode FALSE"
-			mode = 'decision'
+			mode='decision'
 		fi
 		echo -e "\nDRA Mode: $mode"
 		
