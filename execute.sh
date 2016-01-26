@@ -118,12 +118,14 @@ function dra_commands {
 			echo -e "First box: ${DRA_APP_DESTINATION}"
 			echo -e "Second box: ${DRA_APP_NOTDESTINATION}"
 			
-			event1_file='deployInfo_'
-			event1_file+=${DRA_APP_DESTINATION}
+			event1_name='deployInfo_'
+			event1_name+=${DRA_APP_DESTINATION}
+			event1_file=$event1_name
 			event1_file+='.json'
 			
-			event2_file='deployInfo_'
-			event2_file+=${DRA_APP_NOTDESTINATION}
+			event2_name='deployInfo_'
+			event2_name+=${DRA_APP_NOTDESTINATION}
+			event2_file=$event2_name
 			event2_file+='.json'
 			
 			event1_to_file='echo $event_variable > $event1_file'
@@ -138,9 +140,9 @@ function dra_commands {
 			eval $showcontents
 			
 			echo -e "\nSending event to iDRA ...\n"
-			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event1_file'
+			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
 			eval $send_event1
-			send_event2='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event2_file'
+			send_event2='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event2_name -file=$event2_file'
 			eval $send_event2
 			
 		else
