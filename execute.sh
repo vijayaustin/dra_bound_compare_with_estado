@@ -138,6 +138,8 @@ function dra_commands {
 			eval $showcontents
 			
 			echo -e "\nSending event to iDRA ...\n"
+			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event1_file'
+			send_event2='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event2_file'
 			
 		else
 			RESULT3=0
@@ -192,7 +194,7 @@ function dra_commands {
 			echo -e "Service List is not defined or is empty .. proceeding with deployment ..."
 		fi
 		
-		if [[ $RESULT1 != 0 || $RESULT2 != 0 || $RESULT3 != 0 ]]; then
+		if [[ $RESULT1 != 0 || $RESULT2 != 0]]; then
 			return 1
 		else
 			return 0
