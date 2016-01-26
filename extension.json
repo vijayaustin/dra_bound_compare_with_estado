@@ -23,7 +23,7 @@
         },
 		{
             "name": "SERVICE_LIST",
-            "type": "Radio",
+            "type": "Text",
             "required": "false",
             "default_value": "",
             "label_key": "SERVICE_LIST_KEY",
