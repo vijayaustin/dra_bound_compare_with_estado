@@ -114,9 +114,7 @@ function dra_commands {
         fi
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-			echo -e "Comparing applications now ..."
-			echo -e "First box: ${DRA_APP_DESTINATION}"
-			echo -e "Second box: ${DRA_APP_NOTDESTINATION}"
+			echo -e "Comparing applications ..."
 			
 			event1_name='deployInfo_'
 			event1_name+=${DRA_APP_DESTINATION}
@@ -131,15 +129,17 @@ function dra_commands {
 			event1_to_file='echo $event_variable > $event1_file'
 			eval $event1_to_file
 			
-			echo -e "\nSending event to iDRA ...\n"
+			echo -e "\nSending $event1_name event to iDRA ...\n"
 			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
+			echo -e "${no_color}"
 			eval $send_event1
+			echo -e "${no_color}"
 			
 			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
 			compare_criteria_variable+=$event2_name
 			compare_criteria_variable+=','
 			compare_criteria_variable+=$event1_name
-			')", "op": "=", "value": true } ] } ] }'
+			compare_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
 			eval $compare_criteria_to_file
 			echo -e "\nCriteria created:\n"
