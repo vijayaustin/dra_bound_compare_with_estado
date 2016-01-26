@@ -22,6 +22,14 @@
             "desc_key": "APPLICATION_NAME_DESC"
         },
 		{
+            "name": "DRA_MODE",
+            "type": "Checkbox",
+            "required": "false",
+            "default_value": "false",
+            "label_key": "DRA_MODE_KEY",
+            "desc_key": "DRA_MODE_DESC"
+        },
+		{
             "name": "SERVICE_LIST",
             "type": "Text",
             "required": "false",
