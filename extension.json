@@ -25,7 +25,6 @@
             "name": "DRA_MODE",
             "type": "Radio",
             "required": "false",
-            "default_value": "Decision",
             "label_key": "DRA_MODE_KEY",
             "desc_key": "DRA_MODE_DESC",
             "options": [
