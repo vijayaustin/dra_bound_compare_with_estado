@@ -82,9 +82,14 @@ function dra_commands {
 		eval $send_event
 		echo -e "${no_color}"
 		
+		echo -e "From ENVIRONMENT, dra mode boolean is - "
+		echo ${DRA_MODE}
+		
 		if [ ${DRA_MODE} == true ]; then
+			echo -e "\nMode TRUE"
 			mode = 'advisory'
 		else
+			echo -e "\nMode FALSE"
 			mode = 'decision'
 		fi
 		echo -e "\nDRA Mode: $mode"
@@ -131,7 +136,6 @@ function dra_commands {
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
 			echo -e "Estado service list: $1 is defined and not empty\n"
-			echo -e "\nDRA Mode in loop: $mode"
 			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "'
 			estado_criteria_variable+=$mode
 			estado_criteria_variable+='", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
