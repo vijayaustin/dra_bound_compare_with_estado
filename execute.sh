@@ -103,7 +103,7 @@ function dra_commands {
 			#cat boundcriteriafile.json
 			
 			get_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
-			echo -e "\nRequesting decision from DRA...\n"
+			echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $get_decision
 			RESULT2=$?
@@ -132,7 +132,7 @@ function dra_commands {
         fi
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
-			echo -e "Estado service list: $1 is defined and not empty\n"
+			echo -e "Estado service list: $1 is defined and not empty"
 			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "'
 			estado_criteria_variable+=$mode
 			estado_criteria_variable+='", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
@@ -151,7 +151,7 @@ function dra_commands {
 			#echo -e "Final command sent to grunt-iDRA to check Estado Services: "
 			#echo -e $dra_grunt_command
 			
-			echo -e "\nRequesting decision from DRA...\n"
+			echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $dra_grunt_command
 			RESULT1=$?
