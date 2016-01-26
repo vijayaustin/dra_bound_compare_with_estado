@@ -132,7 +132,7 @@ function dra_commands {
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
 			echo -e "Estado service list: $1 is defined and not empty\n"
-			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "' + dra_mode + '", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
+			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "$dra_mode", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
 			estado_criteria_variable+=$1
 			estado_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			
