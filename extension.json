@@ -22,23 +22,6 @@
             "desc_key": "APPLICATION_NAME_DESC"
         },
 		{
-            "name": "DRA_MODE",
-            "type": "Radio",
-            "required": "false",
-            "label_key": "DRA_MODE_KEY",
-            "desc_key": "DRA_MODE_DESC",
-            "options": [
-                {
-                    "label_key": "DRA_MODE_OPTION_1_KEY",
-                    "value": "Advisory"
-                },
-                {
-                    "label_key": "DRA_MODE_OPTION_2_KEY",
-                    "value": "Decision"
-                }
-            ]
-        },
-		{
             "name": "SERVICE_LIST",
             "type": "Text",
             "required": "false",
