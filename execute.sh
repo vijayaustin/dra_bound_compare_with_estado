@@ -194,7 +194,7 @@ function dra_commands {
 			echo -e "Service List is not defined or is empty .. proceeding with deployment ..."
 		fi
 		
-		if [[ $RESULT1 != 0 || $RESULT2 != 0]]; then
+		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then
 			return 1
 		else
 			return 0
