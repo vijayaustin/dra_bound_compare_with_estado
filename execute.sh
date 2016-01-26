@@ -114,25 +114,31 @@ function dra_commands {
         fi
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-			echo -e "Comparing applications now ...\n"
-			echo -e "First box: ${DRA_APP_DESTINATION}\n"
-			echo -e "Second box: ${DRA_APP_NOTDESTINATION}\n"
+			echo -e "Comparing applications now ..."
+			echo -e "First box: ${DRA_APP_DESTINATION}"
+			echo -e "Second box: ${DRA_APP_NOTDESTINATION}"
 			
 			event1_file='deployInfo_'
 			event1_file+=${DRA_APP_DESTINATION}
 			event1_file+='.json'
 			
-			echo $event1_file
+			event2_file='deployInfo_'
+			event2_file+=${DRA_APP_NOTDESTINATION}
+			event2_file+='.json'
 			
 			event1_to_file='echo $event_variable > $event1_file'
 			eval $event1_to_file
+			event2_to_file='echo $event_variable > $event2_file'
+			eval $event2_to_file
 			
 			echo -e "\nFile contents:"
 			showcontents='cat $event1_file'
 			eval $showcontents
+			showcontents='cat $event2_file'
+			eval $showcontents
 			
 			echo -e "\nSending event to iDRA ...\n"
-			eval $send_manifest_event
+			
 		else
 			RESULT3=0
 			echo -e "Skipping 'Compare deployments' check ...\n"
