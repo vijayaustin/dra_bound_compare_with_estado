@@ -95,18 +95,19 @@ function dra_commands {
 			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
 			bound_criteria_variable+=$mode
 			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
-			echo -e "\nCriteria Variable: $bound_criteria_variable"
+			#echo -e "\nCriteria Variable: $bound_criteria_variable"
 			
 			bound_criteria_to_file='echo $bound_criteria_variable > boundcriteriafile.json'
 			eval $bound_criteria_to_file
-			echo -e "\nCriteria created:\n"
-			cat boundcriteriafile.json
+			#echo -e "\nCriteria created:\n"
+			#cat boundcriteriafile.json
 			
 			get_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
-			echo -e "\nRequesting decision from API...\n"
+			echo -e "\nRequesting decision from DRA...\n"
+			echo -e "${no_color}"
 			eval $get_decision
 			RESULT2=$?
-			echo -e "Result of check bound services: $RESULT2"
+			echo -e "${no_color}"
 		else
 			RESULT2=0
 			echo -e "Skipping 'Bound Services' check ...\n"
@@ -140,16 +141,17 @@ function dra_commands {
 			
 			estado_criteria_to_file='echo $estado_criteria_variable > estadocriteriafile.json'
 			eval $estado_criteria_to_file
-			echo -e "\nEstado criteria file:\n"
-			cat estadocriteriafile.json
+			#echo -e "Estado criteria file:"
+			#cat estadocriteriafile.json
 			
 			#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -statusCheck="'
 			#dra_grunt_command+=$1
 			#dra_grunt_command+='"'
 			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=estadocriteriafile.json'
-			echo -e "Final command sent to grunt-iDRA to check Estado Services: "
-			echo -e $dra_grunt_command
+			#echo -e "Final command sent to grunt-iDRA to check Estado Services: "
+			#echo -e $dra_grunt_command
 			
+			echo -e "\nRequesting decision from DRA...\n"
 			echo -e "${no_color}"
 			eval $dra_grunt_command
 			RESULT1=$?
@@ -177,12 +179,11 @@ function dra_commands {
 			echo -e "Service List is not defined or is empty .. proceeding with deployment ..."
 		fi
 		
-		if [[ $RESULT1 != 0 || $RESULT2 != 0 ]]; then
+		if [[ $RESULT1 != 0 || $RESULT2 != 0 || $RESULT3 != 0 ]]; then
 			return 1
 		else
 			return 0
 		fi
-
 }
 
 dra_logger
