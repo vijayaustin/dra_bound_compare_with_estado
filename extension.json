@@ -67,7 +67,7 @@
                 },
                 {
                     "label_key": "APP_DESTINATION_OPTION_2_KEY",
-                    "value": "Deploy"
+                    "value": "Prod"
                 },
                 { 
                     "label_key": "APP_DESTINATION_OPTION_3_KEY",
@@ -84,14 +84,6 @@
             "desc_key": "ENABLE_COMPARE_APPS_DESC"
         },
 		{
-            "name": "MANIFEST_FILE",
-            "type": "Text",
-            "required": "false",
-            "default_value": "",
-            "label_key": "MANIFEST_FILE_KEY",
-            "desc_key": "MANIFEST_FILE_DESC"
-        },
-		{
             "name": "APP_NOTDESTINATION",
             "type": "Select",
             "required": "false",
@@ -105,14 +97,10 @@
                 },
                 {
                     "label_key": "APP_NOTDESTINATION_OPTION_2_KEY",
-                    "value": "Deploy"
+                    "value": "Prod"
                 },
                 { 
                     "label_key": "APP_NOTDESTINATION_OPTION_3_KEY",
-                    "value": "Alpha" 
-                },
-				{ 
-                    "label_key": "APP_NOTDESTINATION_OPTION_4_KEY",
                     "value": "Alpha" 
                 }
             ]
