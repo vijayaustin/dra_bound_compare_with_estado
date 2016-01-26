@@ -116,9 +116,13 @@ function dra_commands {
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
 			echo -e "Comparing applications now ...\n"
 			echo -e "First box: ${DRA_APP_DESTINATION}\n"
-			echo -e "Second box: ${DRA_APP_NOT_DESTINATION}\n"
+			echo -e "Second box: ${DRA_APP_NOTDESTINATION}\n"
 			
-			event1_file='deplyInfo_${DRA_APP_DESTINATION}.json'
+			event1_file='deployInfo_'
+			event1_file+=${DRA_APP_DESTINATION}
+			event1_file+='.json'
+			
+			echo $event1_file
 			
 			event1_to_file='echo $event_variable > $event1_file'
 			eval $event_to_file
