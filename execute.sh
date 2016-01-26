@@ -139,7 +139,9 @@ function dra_commands {
 			
 			echo -e "\nSending event to iDRA ...\n"
 			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event1_file'
+			eval $send_event1
 			send_event2='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=$event2_file'
+			eval $send_event2
 			
 		else
 			RESULT3=0
