@@ -69,15 +69,15 @@ function dra_commands {
 		event_variable+='","CF_SPACE_ID":"'
 		event_variable+=${CF_SPACE_ID}
 		event_variable+='"}'
-		#echo -e "\nEvent Variable: $event_variable"
+		echo -e "\nEvent Variable: $event_variable"
 		
 		if [ ${DRA_MODE} == true ]; then
-			dra_mode = 'advisory'
+			mode = 'advisory'
 		else
-			dra_mode = 'decision'
+			mode = 'decision'
 		fi
 		
-		echo -e "\nDRA Mode: $dra_mode"
+		echo -e "\nDRA Mode: $mode"
 		
 		event_to_file='echo $event_variable > deployInfo.json'
 		eval $event_to_file
@@ -132,9 +132,9 @@ function dra_commands {
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
 			echo -e "Estado service list: $1 is defined and not empty\n"
-			echo -e "\nDRA Mode in loop: $dra_mode"
+			echo -e "\nDRA Mode in loop: $mode"
 			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "'
-			estado_criteria_variable+=$dra_mode
+			estado_criteria_variable+=$mode
 			estado_criteria_variable+='", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
 			estado_criteria_variable+=$1
 			estado_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
