@@ -71,6 +71,14 @@ function dra_commands {
 		event_variable+='"}'
 		#echo -e "\nEvent Variable: $event_variable"
 		
+		if [ ${DRA_MODE} == true ]; then
+			dra_mode = 'advisory'
+		else
+			dra_mode = 'decision'
+		fi
+		
+		echo -e "\nDRA Mode: $dra_mode"
+		
 		event_to_file='echo $event_variable > deployInfo.json'
 		eval $event_to_file
 		#echo -e "\nEvent file created:"
@@ -124,16 +132,15 @@ function dra_commands {
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
 			echo -e "Estado service list: $1 is defined and not empty\n"
-			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
+			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "' + dra_mode + '", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
 			estado_criteria_variable+=$1
 			estado_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			
 			estado_criteria_to_file='echo $estado_criteria_variable > estadocriteriafile.json'
 			eval $estado_criteria_to_file
-			#echo -e "\nEstado criteria file:\n"
-			#cat estadocriteriafile.json
+			echo -e "\nEstado criteria file:\n"
+			cat estadocriteriafile.json
 			
-						
 			#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -statusCheck="'
 			#dra_grunt_command+=$1
 			#dra_grunt_command+='"'
