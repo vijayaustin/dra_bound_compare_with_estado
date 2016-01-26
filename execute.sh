@@ -69,7 +69,7 @@ function dra_commands {
 		event_variable+='","CF_SPACE_ID":"'
 		event_variable+=${CF_SPACE_ID}
 		event_variable+='"}'
-		echo -e "\nEvent Variable: $event_variable"
+		#echo -e "\nEvent Variable: $event_variable"
 
 		event_to_file='echo $event_variable > deployInfo.json'
 		eval $event_to_file
@@ -82,31 +82,27 @@ function dra_commands {
 		eval $send_event
 		echo -e "${no_color}"
 		
-		echo -e "From ENVIRONMENT, dra mode boolean is - "
-		echo ${DRA_MODE}
-		
 		if [ ${DRA_MODE} == true ]; then
-			echo -e "\nMode TRUE"
 			mode='advisory'
 		else
-			echo -e "\nMode FALSE"
 			mode='decision'
 		fi
-		echo -e "\nDRA Mode: $mode"
 		
 		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
 		
 			echo -e "Checking status of services bound to this application ...\n"
 			
-			criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
-			echo -e "\nCriteria Variable: $criteria_variable"
+			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
+			bound_criteria_variable+=$mode
+			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
+			echo -e "\nCriteria Variable: $bound_criteria_variable"
 			
-			criteria_to_file='echo $criteria_variable > criteriafile.json'
-			eval $criteria_to_file
+			bound_criteria_to_file='echo $bound_criteria_variable > boundcriteriafile.json'
+			eval $bound_criteria_to_file
 			echo -e "\nCriteria created:\n"
-			cat criteriafile.json
+			cat boundcriteriafile.json
 			
-			get_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=criteriafile.json'
+			get_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
 			echo -e "\nRequesting decision from API...\n"
 			eval $get_decision
 			RESULT2=$?
