@@ -125,7 +125,7 @@ function dra_commands {
 			echo $event1_file
 			
 			event1_to_file='echo $event_variable > $event1_file'
-			eval $event_to_file
+			eval $event1_to_file
 			
 			echo -e "\nFile contents:"
 			showcontents='cat $event1_file'
