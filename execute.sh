@@ -194,7 +194,7 @@ function dra_commands {
 			fi
 			while [[ $RESULT1 -ne 0 && $ATTEMPT -ge 1 && $ATTEMPT -le $DRA_ATTEMPT_MAX ]]
 			do
-				sleep 6
+				sleep 9
 				echo -e "${no_color}"
 				eval $dra_grunt_command
 				RESULT1=$?
