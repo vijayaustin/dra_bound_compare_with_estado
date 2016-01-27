@@ -77,7 +77,7 @@ function dra_commands {
 		#cat deployInfo.json
 		
 		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json'
-		echo -e "\nSending deployInfo event to iDRA ..."
+		echo -e "Sending deployInfo event to iDRA ..."
 		echo -e "${no_color}"
 		eval $send_event
 		echo -e "${no_color}"
@@ -121,7 +121,7 @@ function dra_commands {
 		event1_to_file='echo $event_variable > $event1_file'
 		eval $event1_to_file
 		
-		echo -e "\nSending $event1_name event to iDRA ...\n"
+		echo -e "Sending $event1_name event to iDRA ...\n"
 		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
 		echo -e "${no_color}"
 		eval $send_event1
@@ -144,7 +144,7 @@ function dra_commands {
 			compare_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
 			eval $compare_criteria_to_file
-			echo -e "\nCriteria created:\n"
+			echo -e "\nCriteria created:"
 			cat comparecriteriafile.json
 			
 			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json'
