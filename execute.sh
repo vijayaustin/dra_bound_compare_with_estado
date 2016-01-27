@@ -113,28 +113,28 @@ function dra_commands {
 			echo -e "Skipping 'Bound Services' check ...\n"
         fi
 		
+		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
+		event1_name='deployInfo_'
+		event1_name+=${DRA_APP_DESTINATION}
+		event1_file=$event1_name
+		event1_file+='.json'
+		event1_to_file='echo $event_variable > $event1_file'
+		eval $event1_to_file
+		
+		echo -e "\nSending $event1_name event to iDRA ...\n"
+		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
+		echo -e "${no_color}"
+		eval $send_event1
+		echo -e "${no_color}"
+		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
+		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-			echo -e "Comparing applications ..."
-			
-			event1_name='deployInfo_'
-			event1_name+=${DRA_APP_DESTINATION}
-			event1_file=$event1_name
-			event1_file+='.json'
-			
+			echo -e "Comparing applications ..."	
 			event2_name='deployInfo_'
 			event2_name+=${DRA_APP_NOTDESTINATION}
 			event2_file=$event2_name
 			event2_file+='.json'
-			
-			event1_to_file='echo $event_variable > $event1_file'
-			eval $event1_to_file
-			
-			echo -e "\nSending $event1_name event to iDRA ...\n"
-			send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
-			echo -e "${no_color}"
-			eval $send_event1
-			echo -e "${no_color}"
-			
+
 			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "'
 			compare_criteria_variable+=$mode
 			compare_criteria_variable+='", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
@@ -187,6 +187,7 @@ function dra_commands {
 			
 			#echo -e "Result of check Estado services: $RESULT1"
 			
+			DRA_ATTEMPT_MAX=3
 			if [[ $RESULT1 != 0 && $DRA_ATTEMPT_MAX -ge 1 ]]; then 
 				echo -e "\nTRYING MULTIPLE ATTEMPTS TO CHECK FOR SERVICE STATUS ...\n"
 				ATTEMPT=1
