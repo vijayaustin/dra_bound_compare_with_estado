@@ -135,7 +135,9 @@ function dra_commands {
 			eval $send_event1
 			echo -e "${no_color}"
 			
-			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "decision", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
+			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "'
+			compare_criteria_variable+=$mode
+			compare_criteria_variable+='", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
 			compare_criteria_variable+=$event2_name
 			compare_criteria_variable+=','
 			compare_criteria_variable+=$event1_name
