@@ -18,7 +18,7 @@ PROJECT_NAME = sys.argv[3]
 DRA_SERVICE_NAME = 'draservicebroker'
 DRA_PRESENT = False
 
-
+print BEARER
 
 try:
     r = requests.get( 'https://devops-api.stage1.ng.bluemix.net/v1/toolchains/' + TOOLCHAIN_ID + '?include=metadata', headers={ 'Authorization': BEARER })
