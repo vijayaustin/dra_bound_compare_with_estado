@@ -36,6 +36,7 @@ set +x
 function dra_logger {
 
 	export CF_TOKEN=$(sed -e 's/^.*"AccessToken":"\([^"]*\)".*$/\1/' ~/.cf/config.json)
+	echo ${CF_TOKEN}
 	chmod 777 ${EXT_DIR}/*.py
     ${EXT_DIR}/is_dra_there.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}"
 	IS_DRA_RESULT=$?
