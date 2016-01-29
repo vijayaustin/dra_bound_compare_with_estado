@@ -120,15 +120,11 @@ cf push \"${CF_APP}\"",
 set +x
 set +e 
 
-echo \"$CF_APP_NAME\"
 if [ -z \"$CF_APP_NAME\" ]; then
-	echo 'CF_APP_NAME not there'
 	export CF_APP=#APPLICATION_NAME#
 else
-	echo 'CF_APP_NAME there'
     export CF_APP=$CF_APP_NAME
 fi
-echo \"$CF_APP\"
 
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#

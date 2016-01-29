@@ -41,10 +41,10 @@ function dra_logger {
 	IS_DRA_RESULT=$?
 	
 	if [ $IS_DRA_RESULT -eq 0 ]; then
-		echo "DRA is present";
+		#echo "DRA is present";
 		dra_commands "${DRA_SERVICE_LIST}"
 	else
-		echo "DRA is not present";
+		#echo "DRA is not present";
 		return 0
 	fi
 }
