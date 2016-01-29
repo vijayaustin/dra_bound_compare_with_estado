@@ -129,7 +129,7 @@ function dra_commands {
 		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
-			echo -e "Comparing applications ..."	
+			#echo -e "Comparing applications ..."	
 			event2_name='deployInfo_'
 			event2_name+=${DRA_APP_NOTDESTINATION}
 			event2_file=$event2_name
@@ -144,8 +144,8 @@ function dra_commands {
 			compare_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
 			eval $compare_criteria_to_file
-			echo -e "\nCriteria created:"
-			cat comparecriteriafile.json
+			#echo -e "\nCriteria created:"
+			#cat comparecriteriafile.json
 			
 			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json --no-color'
 			echo -e "Requesting decision from DRA..."
@@ -160,7 +160,7 @@ function dra_commands {
         fi
 		
 		if [ -n "$1" ] && [ "$1" != " " ]; then
-			echo -e "Estado service list: $1 is defined and not empty"
+			#echo -e "Estado service list: $1 is defined and not empty"
 			estado_criteria_variable='{ "name": "DRADeploy_ESTADO_CHECK", "revision": 2, "project": "key", "mode": "'
 			estado_criteria_variable+=$mode
 			estado_criteria_variable+='", "rules": [ { "name": "Check for Estado Services", "conditions": [ { "eval": "_isEnvironmentListPassing('
@@ -179,7 +179,7 @@ function dra_commands {
 			#echo -e "Final command sent to grunt-iDRA to check Estado Services: "
 			#echo -e $dra_grunt_command
 			
-			echo -e "Requesting decision from DRA..."
+			#echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $dra_grunt_command
 			RESULT1=$?
