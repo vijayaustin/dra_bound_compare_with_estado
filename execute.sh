@@ -148,7 +148,7 @@ function dra_commands {
 			#cat comparecriteriafile.json
 			
 			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json --no-color'
-			echo -e "Requesting decision from DRA..."
+			#echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $get_compare_decision
 			RESULT3=$?
