@@ -127,9 +127,10 @@ else
 	echo 'CF_APP_NAME not there'
 	export CF_APP=#APPLICATION_NAME#
 fi
-echo -e '\nCF_APP value: $CF_APP'
+echo -e '\nCF_APP value: ${CF_APP}'
 echo '$CF_APP'
 echo \"$CF_APP\"
+echo \"$CF_APP_NAME\"
 
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
