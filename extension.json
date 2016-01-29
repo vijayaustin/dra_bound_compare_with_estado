@@ -121,11 +121,15 @@ set +x
 set +e 
 
 if [ -z \"$CF_APP_NAME\" ]; then
+	echo 'CF_APP_NAME there'
     export CF_APP=$CF_APP_NAME
 else
+	echo 'CF_APP_NAME not there'
 	export CF_APP=#APPLICATION_NAME#
 fi
 echo -e '\nCF_APP value: $CF_APP'
+echo '$CF_APP'
+echo \"$CF_APP\"
 
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
