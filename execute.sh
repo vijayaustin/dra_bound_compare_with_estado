@@ -76,7 +76,7 @@ function dra_commands {
 		#echo -e "\nEvent file created:"
 		#cat deployInfo.json
 		
-		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json'
+		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json --no-color'
 		echo -e "Sending deployInfo event to iDRA ..."
 		echo -e "${no_color}"
 		eval $send_event
@@ -102,7 +102,7 @@ function dra_commands {
 			#echo -e "\nCriteria created:\n"
 			#cat boundcriteriafile.json
 			
-			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json'
+			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json --no-color'
 			echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $get_bound_decision
@@ -121,8 +121,8 @@ function dra_commands {
 		event1_to_file='echo $event_variable > $event1_file'
 		eval $event1_to_file
 		
-		echo -e "Sending $event1_name event to iDRA ...\n"
-		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file'
+		echo -e "Sending $event1_name event to iDRA ..."
+		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file --no-color'
 		echo -e "${no_color}"
 		eval $send_event1
 		echo -e "${no_color}"
@@ -147,7 +147,7 @@ function dra_commands {
 			echo -e "\nCriteria created:"
 			cat comparecriteriafile.json
 			
-			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json'
+			get_compare_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=comparecriteriafile.json --no-color'
 			echo -e "Requesting decision from DRA..."
 			echo -e "${no_color}"
 			eval $get_compare_decision
@@ -175,7 +175,7 @@ function dra_commands {
 			#dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -statusCheck="'
 			#dra_grunt_command+=$1
 			#dra_grunt_command+='"'
-			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=estadocriteriafile.json'
+			dra_grunt_command='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=estadocriteriafile.json --no-color'
 			#echo -e "Final command sent to grunt-iDRA to check Estado Services: "
 			#echo -e $dra_grunt_command
 			
