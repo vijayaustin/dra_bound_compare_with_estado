@@ -120,7 +120,13 @@ cf push \"${CF_APP}\"",
 set +x
 set +e 
 
-export CF_APP=#APPLICATION_NAME#
+if [ -z \"$CF_APP_NAME\" ]; then
+    export CF_APP=$CF_APP_NAME
+else
+	export CF_APP=#APPLICATION_NAME#
+fi
+echo -e '\nCF_APP value: $CF_APP'
+
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
 export DRA_PROJECT_KEY=#TOOLCHAIN_ID#
