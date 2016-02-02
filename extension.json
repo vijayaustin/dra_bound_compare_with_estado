@@ -1,5 +1,5 @@
 {
-    "id": "ibm.devops.services.pipeline.dra_deploy_extn",
+    "id": "ibm.devops.services.pipeline.dra_deploy_extn_test",
     "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
@@ -68,6 +68,14 @@
             ]
         },
 		{
+            "name": "APP_DESTINATION_MANIFEST",
+            "type": "Text",
+            "required": "false",
+            "default_value": "",
+            "label_key": "APP_DESTINATION_MANIFEST_KEY",
+            "desc_key": "APP_DESTINATION_MANIFEST_DESC"
+        },
+		{
             "name": "ENABLE_COMPARE_APPS",
             "type": "Checkbox",
             "required": "false",
@@ -133,7 +141,7 @@ export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
 export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
 export DRA_ENABLE_COMPARE_APPS=#ENABLE_COMPARE_APPS#
 export DRA_APP_DESTINATION=#APP_DESTINATION#
-export DRA_MANIFEST_FILE=\"#MANIFEST_FILE#\"
+export DRA_MANIFEST_FILE=\"#APP_DESTINATION_MANIFEST#\"
 export DRA_COMPARE_MEMORY=#COMPARE_MEMORY#
 export DRA_COMPARE_DISK_QUOTA=#COMPARE_DISK_QUOTA#
 export DRA_COMPARE_INSTANCES=#COMPARE_INSTANCES#

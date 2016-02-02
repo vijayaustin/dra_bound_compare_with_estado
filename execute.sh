@@ -128,8 +128,11 @@ function dra_commands {
 		event1_to_file='echo $event_variable > $event1_file'
 		eval $event1_to_file
 		
+		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file='
+		send_event1+=${DRA_MANIFEST_FILE}
+		send_event1+=' --no-color'
+		echo -e "Event to send manifest file: $send_event1"
 		echo -e "Sending $event1_name event to iDRA ..."
-		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=$event1_name -file=$event1_file --no-color'
 		echo -e "${no_color}"
 		eval $send_event1
 		echo -e "${no_color}"
