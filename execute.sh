@@ -84,9 +84,9 @@ function dra_commands {
 		#cat deployInfo.json
 		
 		send_event='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType=deployInfo -file=deployInfo.json --no-color'
-		echo -e "Sending deployInfo event to iDRA ..."
+		#echo -e "Sending deployInfo event to iDRA ..."
 		echo -e "${no_color}"
-		eval $send_event
+		#eval $send_event
 		echo -e "${no_color}"
 		
 		if [ ${DRA_MODE} == true ]; then
