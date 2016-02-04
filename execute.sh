@@ -113,7 +113,7 @@ function dra_commands {
 		
 		send_event1='grunt --gruntfile=node_modules/grunt-idra2/idra.js -eventType='
 		send_event1+=$event1_name
-		send_event1+='-file='
+		send_event1+=' -file='
 		send_event1+=${DRA_MANIFEST_FILE}
 		send_event1+=' --no-color'
 		echo -e "Event to send manifest file: $send_event1"
