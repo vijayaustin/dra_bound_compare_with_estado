@@ -35,20 +35,28 @@ set +x
 
 function dra_logger {
 
-	export CF_TOKEN=$(sed -e 's/^.*"AccessToken":"\([^"]*\)".*$/\1/' ~/.cf/config.json)
+	if [ -z "$TOOLCHAIN_TOKEN" ]; then
+        export CF_TOKEN=$(sed -e 's/^.*"AccessToken":"\([^"]*\)".*$/\1/' ~/.cf/config.json)
+    else
+        export CF_TOKEN=$TOOLCHAIN_TOKEN
+    fi
+    
+    
     OUTPUT_FILE='draserver.txt'
 	chmod 777 ${EXT_DIR}/*.py
     ${EXT_DIR}/is_dra_there.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}" "${OUTPUT_FILE}"
 	IS_DRA_RESULT=$?
     
-    export DRA_SERVER=`cat ${OUTPUT_FILE}`
-    rm ${OUTPUT_FILE}
-
-    debugme echo "DRA_SERVER: ${DRA_SERVER}"
     
 	
 	if [ $IS_DRA_RESULT -eq 0 ]; then
 		#echo "DRA is present";
+        export DRA_SERVER=`cat ${OUTPUT_FILE}`
+        rm ${OUTPUT_FILE}
+
+        debugme echo "DRA_SERVER: ${DRA_SERVER}"
+        
+        
 		dra_commands "${DRA_SERVICE_LIST}"
 	else
 		#echo "DRA is not present";
