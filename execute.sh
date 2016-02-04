@@ -128,7 +128,7 @@ function dra_commands {
 			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
 			bound_criteria_variable+=$mode
 			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true, "forEventType": "'
-			bound_criteria_variable+=$send_event1
+			bound_criteria_variable+=$event1_name
 			bound_criteria_variable+='" } ] } ] }'
 			#echo -e "\nCriteria Variable: $bound_criteria_variable"
 			
