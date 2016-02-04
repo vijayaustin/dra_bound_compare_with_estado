@@ -103,31 +103,6 @@ function dra_commands {
 			mode='decision'
 		fi
 		
-		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
-		
-			echo -e "Checking status of services bound to this application ...\n"
-			
-			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
-			bound_criteria_variable+=$mode
-			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true } ] } ] }'
-			#echo -e "\nCriteria Variable: $bound_criteria_variable"
-			
-			bound_criteria_to_file='echo $bound_criteria_variable > boundcriteriafile.json'
-			eval $bound_criteria_to_file
-			#echo -e "\nCriteria created:\n"
-			#cat boundcriteriafile.json
-			
-			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json --no-color'
-			echo -e "Requesting decision from DRA..."
-			echo -e "${no_color}"
-			eval $get_bound_decision
-			RESULT2=$?
-			echo -e "${no_color}"
-		else
-			RESULT2=0
-			echo -e "Skipping 'Bound Services' check ...\n"
-        fi
-		
 		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
 		event1_name='deployInfo_'
 		event1_name+=${DRA_APP_DESTINATION}
@@ -145,6 +120,33 @@ function dra_commands {
 		eval $send_event1
 		echo -e "${no_color}"
 		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
+		
+		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
+		
+			echo -e "Checking status of services bound to this application ...\n"
+			
+			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
+			bound_criteria_variable+=$mode
+			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true, "forEventType": "'
+			bound_criteria_variable+=$send_event1
+			bound_criteria_variable+=" } ] } ] }'
+			#echo -e "\nCriteria Variable: $bound_criteria_variable"
+			
+			bound_criteria_to_file='echo $bound_criteria_variable > boundcriteriafile.json'
+			eval $bound_criteria_to_file
+			#echo -e "\nCriteria created:\n"
+			#cat boundcriteriafile.json
+			
+			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json --no-color'
+			echo -e "Requesting decision from DRA..."
+			echo -e "${no_color}"
+			eval $get_bound_decision
+			RESULT2=$?
+			echo -e "${no_color}"
+		else
+			RESULT2=0
+			echo -e "Skipping 'Bound Services' check ...\n"
+        fi
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
 			#echo -e "Comparing applications ..."	
