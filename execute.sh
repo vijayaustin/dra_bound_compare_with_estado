@@ -160,9 +160,9 @@ function dra_commands {
 			compare_criteria_variable='{ "name": "DRADeploy_COMPARE_APPS", "revision": 2, "project": "key", "mode": "'
 			compare_criteria_variable+=$mode
 			compare_criteria_variable+='", "rules": [ { "name": "Compare applications", "conditions": [ { "eval": "_compareDeployments('
-			compare_criteria_variable+=$event2_name
-			compare_criteria_variable+=','
 			compare_criteria_variable+=$event1_name
+			compare_criteria_variable+=','
+			compare_criteria_variable+=$event2_name
 			compare_criteria_variable+=')", "op": "=", "value": true } ] } ] }'
 			compare_criteria_to_file='echo $compare_criteria_variable > comparecriteriafile.json'
 			eval $compare_criteria_to_file
