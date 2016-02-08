@@ -1,3 +1,4 @@
-# Sauce Labs with DRA
-### Modified Sauce Labs extension with DRA support for demo purposes.
-Contains extra functionality for DRA to demo submitting the Sauce job data to their analytics engine.
+# DRA Check & Deploy job
+### A DRA enabled job which can make decisions on environment to ensure a successful deployment
+Contains extra functionality for DRA to demo submitting the deploy job data to their analytics engine.
+.
