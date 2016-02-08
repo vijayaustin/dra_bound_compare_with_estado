@@ -105,6 +105,11 @@ cf push \"${CF_APP}\"",
 set +x
 set +e 
 
+#if [ -z \"$CF_APP_NAME\" ]; then
+#	export CF_APP=#APPLICATION_NAME#
+#else
+#    export CF_APP=$CF_APP_NAME
+#fi
 
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
