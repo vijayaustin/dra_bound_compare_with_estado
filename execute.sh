@@ -46,17 +46,12 @@ function dra_logger {
 	chmod 777 ${EXT_DIR}/*.py
     ${EXT_DIR}/is_dra_there.py ${PIPELINE_TOOLCHAIN_ID} "${CF_TOKEN}" "${IDS_PROJECT_NAME}" "${OUTPUT_FILE}"
 	IS_DRA_RESULT=$?
-    
-    
 	
 	if [ $IS_DRA_RESULT -eq 0 ]; then
 		#echo "DRA is present";
         export DRA_SERVER=`cat ${OUTPUT_FILE}`
         rm ${OUTPUT_FILE}
-
         debugme echo "DRA_SERVER: ${DRA_SERVER}"
-        
-        
 		dra_commands "${DRA_SERVICE_LIST}"
 	else
 		#echo "DRA is not present";
@@ -123,32 +118,10 @@ function dra_commands {
 		echo -e "${no_color}"
 		# Move default current deployment event sent regardless of DRA_ENABLE_COMPARE_APPS is checked or not
 		
-		if [ ${DRA_ENABLE_BOUND_SERVICE} == true ]; then
-		
-			echo -e "Checking status of services bound to this application ...\n"
-			
-			bound_criteria_variable='{ "name": "DRADeploy_BOUND_COMPARE", "revision": 2, "project": "key", "mode": "'
-			bound_criteria_variable+=$mode
-			bound_criteria_variable+='", "rules": [ { "name": "Check for bound services", "conditions": [ { "eval": "_areApplicationBoundServicesAvailable", "op": "=", "value": true, "forEventType": "'
-			bound_criteria_variable+=$event1_name
-			bound_criteria_variable+='" } ] } ] }'
-			#echo -e "\nCriteria Variable: $bound_criteria_variable"
-			
-			bound_criteria_to_file='echo $bound_criteria_variable > boundcriteriafile.json'
-			eval $bound_criteria_to_file
-			#echo -e "\nCriteria created:\n"
-			#cat boundcriteriafile.json
-			
-			get_bound_decision='grunt --gruntfile=node_modules/grunt-idra2/idra.js -decision=dynamic -criteriafile=boundcriteriafile.json --no-color'
-			echo -e "Requesting decision from DRA..."
-			echo -e "${no_color}"
-			eval $get_bound_decision
-			RESULT2=$?
-			echo -e "${no_color}"
-		else
-			RESULT2=0
-			echo -e "Skipping 'Bound Services' check ...\n"
-        fi
+		# Bound services removed for Interconnect. Once added back, assign RESULT2 with result of bound services.
+		RESULT2=0
+		# Bound services removed for Interconnect. Once added back, assign RESULT2 with result of bound services.
+
 		
 		if [ ${DRA_ENABLE_COMPARE_APPS} == true ]; then
 			#echo -e "Comparing applications ..."	

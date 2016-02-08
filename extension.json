@@ -38,14 +38,6 @@
             "desc_key": "SERVICE_LIST_DESC"
         },
 		{
-            "name": "ENABLE_BOUND_SERVICE",
-            "type": "Checkbox",
-            "required": "false",
-            "default_value": "false",
-            "label_key": "ENABLE_BOUND_SERVICE_KEY",
-            "desc_key": "ENABLE_BOUND_SERVICE_DESC"
-        },
-		{
             "name": "APP_DESTINATION",
             "type": "Select",
             "required": "false",
@@ -138,7 +130,7 @@ export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
 export DRA_PROJECT_KEY=#TOOLCHAIN_ID#
 export DRA_SERVICE_LIST=\"#SERVICE_LIST#\"
-export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
+#export DRA_ENABLE_BOUND_SERVICE=#ENABLE_BOUND_SERVICE#
 export DRA_ENABLE_COMPARE_APPS=#ENABLE_COMPARE_APPS#
 export DRA_APP_DESTINATION=#APP_DESTINATION#
 export DRA_MANIFEST_FILE=\"#APP_DESTINATION_MANIFEST#\"
