@@ -6,12 +6,6 @@
     "extension_type": "Test",
     "message_key": "ExtMessage",
 	"inventory_entry_type": "cf",
-	"inputs": [
-        {
-            "type": "Bluemix",
-            "inclusion" : "always"
-        }
-    ],
     "params": [
 		{
             "name": "APPLICATION_NAME",
@@ -101,8 +95,7 @@
             "name": "COMMAND",
             "type": "TextArea",
             "required": "true",
-            "default_value" : "#!/bin/bash
-cf push \"${CF_APP}\"",
+            "default_value" : "#!/bin/bash",
             "label_key": "COMMAND_KEY",
             "desc_key": "COMMAND_DESC"
         }
