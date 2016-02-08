@@ -16,14 +16,6 @@
             "desc_key": "DRA_MODE_DESC"
         },
 		{
-            "name": "SERVICE_LIST",
-            "type": "Text",
-            "required": "false",
-            "default_value": "",
-            "label_key": "SERVICE_LIST_KEY",
-            "desc_key": "SERVICE_LIST_DESC"
-        },
-		{
             "name": "APP_DESTINATION",
             "type": "Select",
             "required": "false",
@@ -82,6 +74,14 @@
                     "value": "Alpha" 
                 }
             ]
+        },
+		{
+            "name": "SERVICE_LIST",
+            "type": "Text",
+            "required": "false",
+            "default_value": "",
+            "label_key": "SERVICE_LIST_KEY",
+            "desc_key": "SERVICE_LIST_DESC"
         },
         {
             "name": "COMMAND",
