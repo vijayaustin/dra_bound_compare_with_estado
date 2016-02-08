@@ -8,14 +8,6 @@
 	"inventory_entry_type": "cf",
     "params": [
 		{
-            "name": "APPLICATION_NAME",
-            "type": "Text",
-            "required": "false",
-            "default_value": "",
-            "label_key": "APPLICATION_NAME_KEY",
-            "desc_key": "APPLICATION_NAME_DESC"
-        },
-		{
             "name": "DRA_MODE",
             "type": "Checkbox",
             "required": "false",
