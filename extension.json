@@ -111,13 +111,7 @@
         "shell": "#!/bin/bash
 
 set +x
-set +e 
-
-if [ -z \"$CF_APP_NAME\" ]; then
-	export CF_APP=#APPLICATION_NAME#
-else
-    export CF_APP=$CF_APP_NAME
-fi
+set +e
 
 export DRA_MODE=#DRA_MODE#
 export IDS_TOOLCHAIN_ID=#TOOLCHAIN_ID#
