@@ -48,7 +48,7 @@ function dra_logger {
 	IS_DRA_RESULT=$?
 	
 	if [ $IS_DRA_RESULT -eq 0 ]; then
-		#echo "DRA is present";
+		echo "Deployment Risk Analytics (DRA) is active.";
         export DRA_SERVER=`cat ${OUTPUT_FILE}`
         rm ${OUTPUT_FILE}
         debugme echo "DRA_SERVER: ${DRA_SERVER}"
