@@ -1,5 +1,5 @@
 {
-    "id": "ibm.devops.services.pipeline.dra_deploy_extn_test_TEST",
+    "id": "ibm.devops.services.pipeline.dra_deploy_extn",
     "version": 1,
     "name_key": "ExtName",
     "desc_key": "ExtDesc",
@@ -24,15 +24,15 @@
             "options": [
                 {
                     "label_key": "APP_DESTINATION_OPTION_1_KEY",
-                    "value": "Test"
+                    "value": "Dev"
                 },
                 {
                     "label_key": "APP_DESTINATION_OPTION_2_KEY",
-                    "value": "Prod"
+                    "value": "Test"
                 },
                 { 
                     "label_key": "APP_DESTINATION_OPTION_3_KEY",
-                    "value": "Alpha" 
+                    "value": "Prod" 
                 }
             ]
         },
@@ -70,7 +70,7 @@
                 },
                 { 
                     "label_key": "APP_NOTDESTINATION_OPTION_3_KEY",
-                    "value": "Alpha" 
+                    "value": "Dev"
                 }
             ]
         },
